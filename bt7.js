@@ -26,32 +26,26 @@ const phonelist = [
     }
 ];
 
-function Lastname() {
-    let LastNameArray = [];
-    for (contact of phonelist) {
-        x = contact.name.split(' ');
-        LastNameArray.push(x[x.length - 1]);
-    } return LastNameArray;
-};
+
+
 function findname(arrinput) {
     let LastNameArray = [];
-    for (contact of phonelist) {
-        x = contact.name.split(' ');
+    for (let i = 0; i < phonelist.length; i++) {
+        x = phonelist[i].name.split(' ');
         LastNameArray.push(x[x.length - 1]);
     }
     InputtoArray = arrinput.split(' ');
     LastNameInput = InputtoArray[InputtoArray.length - 1];
     for (let i = 0; i < LastNameArray.length; i++) {
+
         if (LastNameArray[i] == LastNameInput) {
-            find = LastNameArray[i];
+            find = i;
             break;
         } else {
-            find = false;
+            find = -1;
         }
     } return find;
 };
-
-
 
 function showall(arr) {
     for (contact of arr) {
@@ -66,7 +60,7 @@ while (true) {
     else if (ui == 'C') {
         let newname = prompt('Nhap ten lien lac moi');
         findname(newname);
-        if (find == false) {
+        if (find == -1) {
             let newphone = prompt('Nhap so');
             phonelist.push({ name: newname, phone: newphone });
             showall(phonelist);
@@ -79,13 +73,13 @@ while (true) {
     else if (ui == 'U') {
         let uiu = prompt('Ten lien lac can sua?');
         findname(uiu);
-        let FixIndex = Lastname().indexOf(find);
-        if (find == false) {
+        let FixIndex = find;
+        if (find == -1) {
             alert('Khong tim thay ten');
         } else {
             let newname1 = prompt('Nhap ten moi');
             findname(newname1);
-            if (find == false) {
+            if (find == -1) {
                 let newphone1 = prompt('Nhap so moi');
                 phonelist[FixIndex].name = newname1;
                 phonelist[FixIndex].phone = newphone1;
@@ -98,8 +92,8 @@ while (true) {
     else if (ui == 'D') {
         let uid = prompt('Ten lien lac muon xoa?');
         findname(uid);
-        let DeleteIndex = Lastname().indexOf(find);
-        if (find == false) {
+        let DeleteIndex = find;
+        if (find == -1) {
             alert('Khong tim thay ten');
         } else {
             phonelist.splice(DeleteIndex, 1);
@@ -109,86 +103,4 @@ while (true) {
         alert('Ban nhap sai cau lenh');
     };
 };
-
-
-// *** Phần dưới này bị lỗi function không check được tên đầu tiên
-// *** Giải thích hộ mình với
-
-// function findname(arrinput) {
-//     let LastNameArray = [];
-//     for (contact of phonelist) {
-//         x = contact.name.split(' ');
-//         LastNameArray.push(x[x.length - 1]);
-//     }
-//     InputtoArray = arrinput.split(' ');
-//     LastNameInput = InputtoArray[InputtoArray.length - 1];
-//     for (let i = 0; i < LastNameArray.length; i++) {
-//         if (LastNameArray[i] == LastNameInput) {
-//             find = i;
-//             break;
-//         } else {
-//             find = false;
-//         }
-//     } return find;
-// };
-
-
-
-// function showall(arr) {
-//     for (contact of arr) {
-//         console.log(contact.name + ' - ' + contact.phone);
-//     };
-// };
-// while (true) {
-//     let ui = prompt('Nhap thao tac can lam C/R/U/D ?').toUpperCase();
-//     if (ui == 'R') {
-//         showall(phonelist);
-//     }
-//     else if (ui == 'C') {
-//         let newname = prompt('Nhap ten lien lac moi');
-//         findname(newname);
-//         if (find == false) {
-//             let newphone = prompt('Nhap so');
-//             phonelist.push({ name: newname, phone: newphone });
-//             showall(phonelist);
-//         } else {
-//             alert('Ten nay da co roi');
-//         };
-
-
-//     }
-//     else if (ui == 'U') {
-//         let uiu = prompt('Ten lien lac can sua?');
-//         findname(uiu);
-//         let FixIndex = find;
-//         if (find == false) {
-//             alert('Khong tim thay ten');
-//         } else {
-//             let newname1 = prompt('Nhap ten moi');
-//             findname(newname1);
-//             if (find == false) {
-//                 let newphone1 = prompt('Nhap so moi');
-//                 phonelist[FixIndex].name = newname1;
-//                 phonelist[FixIndex].phone = newphone1;
-//                 showall(phonelist);
-//             } else {
-//                 alert('Ten nay da co roi');
-//             }
-//         };
-//     }
-//     else if (ui == 'D') {
-//         let uid = prompt('Ten lien lac muon xoa?');
-//         findname(uid);
-//         let DeleteIndex = find;
-//         if (find == false) {
-//             alert('Khong tim thay ten');
-//         } else {
-//             phonelist.splice(DeleteIndex, 1);
-//             showall(phonelist);
-//         };
-//     } else {
-//         alert('Ban nhap sai cau lenh');
-//     };
-// };
-
 
